@@ -8,6 +8,8 @@ Imports REnv = SMRUCC.Rsharp.Runtime
 Imports SMRUCC.Rsharp
 Imports System.IO
 Imports SMRUCC.Rsharp.Runtime.Components
+Imports Microsoft.VisualBasic.Data.IO.MessagePack.Constants
+Imports Microsoft.VisualBasic.Serialization.JSON
 
 <Package("MessagePack")>
 Public Module Rscript
@@ -55,9 +57,12 @@ Public Module Rscript
         Call ms.Seek(scan0, SeekOrigin.Begin)
 
         Select Case bytVal
-            Case 147 : bytType = GetType(Byte())
+            Case MsgPackFormats.UINT_8, 147 : bytType = GetType(Byte())
             Case Else
-                Throw New NotImplementedException
+                Dim formats = Enums(Of MsgPackFormats).ToArray
+                Dim list = formats.ToDictionary(Function(a) a.ToString, Function(a) CInt(a))
+
+                Throw New NotImplementedException(list.GetJson)
         End Select
 
         Return MsgPackSerializer.Deserialize(bytType, ms)
