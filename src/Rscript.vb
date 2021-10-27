@@ -47,6 +47,19 @@ Public Module Rscript
             Return buffer.TryCast(Of Message)
         End If
 
-        Return MsgPackSerializer.Deserialize(buffer.TryCast(Of Stream))
+        Dim ms As Stream = buffer.TryCast(Of Stream)
+        Dim scan0 As Long = ms.Position
+        Dim bytVal As Byte = ms.ReadByte
+        Dim bytType As Type
+
+        Call ms.Seek(scan0, SeekOrigin.Begin)
+
+        Select Case bytVal
+            Case 147 : bytType = GetType(Byte())
+            Case Else
+                Throw New NotImplementedException
+        End Select
+
+        Return MsgPackSerializer.Deserialize(bytType, ms)
     End Function
 End Module
