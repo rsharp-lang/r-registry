@@ -7,7 +7,7 @@
 #' @return data stream object
 #' 
 const to_msgpack as function(x, schema = NULL) {
-
+    MessagePack::pack(x, schema);
 }
 
 #' Deserialize object from messagepack data 
@@ -18,5 +18,5 @@ const to_msgpack as function(x, schema = NULL) {
 #'     data in messagepack data format.
 #' 
 const unpack as function(buffer) {
-
+    MessagePack::unpack(buffer);
 }
