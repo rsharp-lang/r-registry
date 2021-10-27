@@ -13,5 +13,8 @@ require(msgpack);
 
 msg = [1,2,3] |> to_msgpack;
 vec = msgpack::unpack(msg);
+
+print(msg);
+print(vec);
 #end region
 ;
