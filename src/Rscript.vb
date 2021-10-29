@@ -59,10 +59,10 @@ Public Module Rscript
         Select Case bytVal
             Case MsgPackFormats.UINT_8, 147 : bytType = GetType(Byte())
             Case Else
-                Dim formats = Enums(Of MsgPackFormats).ToArray
-                Dim list = formats.ToDictionary(Function(a) a.ToString, Function(a) CInt(a))
+                Dim formats = MsgPackFormats.GetEnums
+                Dim err As New NotImplementedException(formats.GetJson)
 
-                Throw New NotImplementedException(list.GetJson)
+                Return Internal.debug.stop(err, env)
         End Select
 
         Return MsgPackSerializer.Deserialize(bytType, ms)

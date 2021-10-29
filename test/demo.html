@@ -45,6 +45,7 @@ h1, h2 {
     background-color: rgb(245, 245, 245);
     padding: 5px;
     max-width: 67.5%;
+	overflow-y: auto;
 }
 
 .output-image {
@@ -87,10 +88,9 @@ extra byte in addition to the strings themselves.</p>
 <br />
 <hr />
 <pre>
-  <code class="code-input language-r hljs">#region "demo code"
-require(msgpack);
+  <code class="code-input language-r hljs">require(msgpack);
 
-msg = [1,2,3] |> to_msgpack;
+msg = [1,2,3,255] |> to_msgpack;
 vec = msgpack::unpack(msg);
 
 print(msg);</code>
@@ -99,8 +99,18 @@ print(msg);</code>
 <div class="output">
   <code>
     <pre>﻿Loading required package: msgpack
-[1]	&H93000000 &H01000000 &H02000000 &H03000000 
-[1]	&H01000000 &H02000000 &H03000000 
+ Error in &lt;globalEnvironment> -> unpack -> unpack -> "unpack" -> unpack
+  1. NotImplementedException: {"NIL":192,"FLOAT_32":202,"FLOAT_64":203,"DOUBLE":203,"UINT_8":204,"UNSIGNED_INTEGER_8":204,"UINT_16":205,"UNSIGNED_INTEGER_16":205,"UINT_32":206,"UNSIGNED_INTEGER_32":206,"UINT_64":207,"UNSIGNED_INTEGER_64":207,"INT_8":208,"INTEGER_8":208,"INT_16":209,"INTEGER_16":209,"INT_32":210,"INTEGER_32":210,"INT_64":211,"INTEGER_64":211,"STR_8":217,"STRING_8":217,"STR_16":218,"STRING_16":218,"STR_32":219,"STRING_32":219,"ARRAY_16":220,"ARRAY_32":221,"MAP_16":222,"MAP_32":223}
+  2. stackFrames: none
+
+ R# source: Call MessagePack::"unpack"(&buffer)
+
+MessagePack.R#_interop::.unpack at msgpack.dll:line &lt;unknown>
+msgpack.call_function."unpack" at msgpack.R:line 21
+msgpack.declare_function.unpack at msgpack.R:line 20
+msgpack.declare_function.unpack at msgpack.R:line 20
+SMRUCC/R#.global.&lt;globalEnvironment> at &lt;globalEnvironment>:line n/a
+
 </pre>
   </code>
 </div>

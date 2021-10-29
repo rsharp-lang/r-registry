@@ -8,10 +8,11 @@
 # extra byte in addition to the strings themselves.
 ;
 
+
 #region "demo code"
 require(msgpack);
 
-msg = [1,2,3] |> to_msgpack;
+msg = [1,2,3,255] |> to_msgpack;
 vec = msgpack::unpack(msg);
 
 print(msg);
