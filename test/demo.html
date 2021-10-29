@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html language="en-US">
+  <head>
+    <link rel="stylesheet" href="https://unpkg.com/@highlightjs/cdn-assets@11.3.1/styles/vs.min.css" />
+    <style id="extend-builder-css-inline-css" type="text/css">
+                            
+                        </style>
+    <script type="text/javascript" src="https://unpkg.com/@highlightjs/cdn-assets@11.3.1/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="notebook">
+                            <h1>Rmsgpack</h1>
+
+<p>Messagepack data read/write code module for R# programming language.</p>
+
+<p><a href="http://msgpack.org/">MessagePack</a> is an efficient binary serialization format. It lets you<br />
+exchange data among multiple languages like JSON but it's faster and<br />
+smaller. For example, small integers (like flags or error code) are<br />
+encoded into a single byte, and typical short strings only require an<br />
+extra byte in addition to the strings themselves.</p>
+
+<br />
+<hr />
+<pre>
+  <code class="code-input language-r hljs">#region "demo code"
+require(msgpack);
+
+msg = [1,2,3] |> to_msgpack;
+vec = msgpack::unpack(msg);
+
+print(msg);</code>
+</pre>
+
+<div class="output">
+  <code>
+    <pre>﻿Loading required package: msgpack
+</pre>
+  </code>
+</div>
+<hr />
+
+                        </div>
+    <script type="text/javascript">hljs.highlightAll();</script>
+  </body>
+</html>
